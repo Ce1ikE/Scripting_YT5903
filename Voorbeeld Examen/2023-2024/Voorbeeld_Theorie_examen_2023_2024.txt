@@ -1,0 +1,86 @@
+
+
+
+( 1)	Welke soorten fouten kunnen in een script opduiken? Geef van elke soort een voorbeeld.
+
+
+( 2)	Leg uit:
+	a) Get-Member
+	
+	b) user profile
+
+( 3)	Met welke commando vraag je hulp pagina’s opvragen in bash
+
+
+( 4)	Wat is het grote verschil tussen de output van powershell en bash commando’s.
+
+
+( 5)	Wat is er fout in volgende bash script? 
+		Het eind resultaat moet ofwel "var = 20" printen of "var != 20"
+
+	1| var=20
+	2| case
+	3| 20
+	4|    echo var = 20
+	5| ;;
+	6| *
+	7|    echo var != 20
+	8| ;;
+	9| done
+
+( 6)	Wat is er fout in volgende powershell script?
+		Het eind resultaat moet ofwel "var >4" printen of een random getal printen
+	
+	1| var=5
+	2| if[ $var -gt 4 ]
+	3| {
+	4|      Write-Host "var > 4
+	5| } else {
+	6|       Get-Random -min 1 -max 6  
+	7| }
+
+
+( 7)	Hieronder zie je een tekst bestand staan wat is de output als we 
+		onderstaande sed commando uitvoeren. Schrijf de volledige output op.
+		
+	1| $ cat text.txt
+	2| The quick brown fox jumps over the lazy dog.
+	3| The quick brown fox jumps over the lazy dog.
+	4| The quick brown fox jumps over the lazy dog.
+	5| This is a test for the test of testing.
+	6|
+	7| > cat text.txt | sed -e ‘ 
+	8| > s/lazy/active/
+	9| > 2s/jumps/crawl/
+   10| > 3d
+   11| > s/^[[:alpha:]]h[a-z][a-z]/regex/
+   12| > ‘
+		
+
+
+( 8)	Wat moet ik aanpassen aan het script loop.sh zodanig dat ik elke state op
+		op een lijn kan printen. Leg uit wat er in het huidig script fout gaat.
+
+
+	1| $ cat states.txt
+	2| Alabama
+	3| Alaska
+	4| Arkansas
+	5| New Hampshire
+	6| New York
+	7|
+	8| $ cat loop.sh
+	9| #!/bin/bash
+   10| for state in $(cat states.txt)
+   11| do
+   12|    echo $state
+   13| done
+   14|
+   15| $ ./loop.sh
+   16| Alabama
+   17| Alaska
+   18| Arkansas
+   19| New 
+   20| Hampshire
+   21| New 
+   22| York

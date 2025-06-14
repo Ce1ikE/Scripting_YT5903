@@ -1,0 +1,125 @@
+( 1)	Welke soorten fouten kunnen in een script opduiken?
+	Geef van elke soort een voorbeeld.
+	
+	=> Run-Time errors:
+
+		1| $a = 1
+		2| $b = 1
+		3| $c = $a - $b
+		4| $result = $a / $c
+		
+
+	=> Lijn 4 "$result" is gelijk aan 1/0 delen door nul is onmogelijk
+	-------------------------------------------------------
+	=> Syntax errors:
+
+		1| for ( $i = 0; $i -lt 10 ; $i++
+		2| {
+		3|	$a += $i
+		4| }
+		
+	=> Lijn 1 ")"
+	-------------------------------------------------------
+	=> Logic errors:
+
+		1| $a = (1..5)
+		2| $b = 6
+		3| foreach ($el in $a) {
+		4| 	$c = $el + $b
+		5| 	write-host $b
+		6| }
+
+	=> Lijn 5 de "write-host" functie schrijft het variable "$b" terug naar
+	   de console maar deze variable blijft constant 
+	   "$c" zou moeten terug geschreven worden naar de terminal
+	-------------------------------------------------------
+
+( 2)	Wat zijn providers? Geef drie voorbeelden van providers die standaard op je systeem aanwezig zijn.
+	Wat is er speciaal aan cmdlets zoals new-item en set-item wanneer deze vanuit een provider opgeroepen worden.
+	(=> See get-help about_providers)
+
+	=> Powershell providers zijn extensies die je toegang geven tot speciefieke data van het systeem.
+	Deze providers zijn opgedeelt zoals drives maar dit zijn powershell drives om de verschillende soorten
+	data beter te beheren en makelijker met de data omtegaan zodat de user niet hoeft na te denken over 
+	de complexe achtergrond over deze soort data. Je kan de providers zien als "data vertalers" die interactie
+	tussen de commando's van de user en de data opslag systeemen meer "user friendly" maken. 
+	
+	In gebouwde providers zijn bv.:
+	- De "Alias" provider
+	- De "FileSystem" provider
+	- De "Environment" provider
+	(=> See Get-PSProvider)
+	
+	Wanneer je de cmdlets "New-Item" en "Set-Item" gebruikt vanuit een andere provider gaan deze cmdlets
+	niet het zelfde effect hebben zoals je normaal verwacht.
+	in de "FileSystem" provider bevoorbeeld kan je met de "New-Item" cmdlet twee type selecteren "files" en "directories"
+	maar in de "Registry" provider zal de type die beschikbaar is "Registry keys" zijn onder deze type hebben we bv.: "DWord" "QWord" "String" "Binary" etc...
+	Het zelfde gaat voor de "Set-Item" cmdlet dat de waarde kan aanpassen van een item maar afhankelijk
+	van wat en in welke provider je dit doet moet je ook de juiste waarde meegeven wat in elke provider
+	heeft een waarde van een item een andere betekenis.
+	Bv.: in de "Registry" provider ga je meestal met "keys" werken die eigenlijk configuratie files zijn
+		Aan deze files kan je niet zomaar een string geven als waarde deze files hebben maar twee waarde on/off => -value 1/0
+	(Meer see => https://www.computerworld.com/article/3154158/all-about-powershell-providers-and-modules.html)
+
+( 3)	Leg uit: (=> Get-Help about_common_parameters)
+	a) WhatIf
+		Geeft een bericht mee dat het effect beschrijft van een command in plaats van
+		het uit te voeren.
+	
+	b) Confirm
+		Vraagt aan de user om bevestiging alvoorens het commando uit te voeren
+
+
+( 4)	Met welke commando vraag je hulp pagina’s op in powershell
+	
+	=> Get-Help
+
+( 5)	Met welke commando vraag je hulp pagina’s opvragen in bash
+
+	=> man
+
+( 6)	Wat is het grote verschil tussen de output van powershell en bash commando’s.
+
+	=> Powershell output geeft objecten terug
+	=> Bash geeft pure text terug
+
+( 7)	Wat is er fout in volgende bash script:
+
+	1| $var=20
+	2| if [$var = 20 ]
+	3|	echo “de waarde van var is 20”
+	4| else
+	5|	echo “de waarde van var is verschillend van 20”
+	6| fi
+
+	=> Lijn 1 => "$var" moet "var" worden
+	=> Lijn 2 => Pas op "$var = 20" zou wel lukken maar gebruik liever voor rekenkundige operator "-eq"  en voor strings "=="
+	=> Lijn 2 => spatie tussen [$ => [ $
+	=> Lijn 2 => mist ";then" om "if" statement correct uit te voeren
+
+( 8)	Hieronder zie je een tekst bestand staan wat is de output als we 
+	onderstaande sed commando uitvoeren. Schrijf de volledige output op.
+
+	1| $ cat text.txt
+	2| The quick brown fox jumps over the lazy dog.
+	3| The quick brown fox jumps over the lazy dog.
+	4| The quick brown fox jumps over the lazy dog.
+	5| This is a test for the test of testing.
+	6|
+	7| > cat text.txt | sed -e ‘ 
+	8| > s/test/trial/
+	9| > 2s/brown/green/
+   10| > s/dog/cat/
+   11| > s/^[[:alpha:]]h[a-z][a-z]/regex/
+   12| > ‘
+
+
+	=> Antwoord:
+	The quick brown fox jumps over the lazy cat
+	The quick green fox jumps over the lazy cat
+	The quick brown fox jumps over the lazy cat
+	regex is a trial for the test of testing
+	
+
+
+
